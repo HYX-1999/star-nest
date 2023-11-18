@@ -1,34 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+/*
+ * @Description:
+ * @Author: hyx
+ * @Date: 2023-11-18 14:59:59
+ */
+
+import { Controller, Get, Param } from '@nestjs/common'
 import { RoleMenuService } from './role-menu.service'
-import { CreateRoleMenuDto } from './dto/create-role-menu.dto'
-import { UpdateRoleMenuDto } from './dto/update-role-menu.dto'
+import { Result } from 'src/common/result'
 
 @Controller('role-menu')
 export class RoleMenuController {
   constructor(private readonly roleMenuService: RoleMenuService) {}
 
-  @Post()
-  create(@Body() createRoleMenuDto: CreateRoleMenuDto) {
-    return this.roleMenuService.create(createRoleMenuDto)
-  }
-
-  @Get()
-  findAll() {
-    return this.roleMenuService.findAll()
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roleMenuService.findOne(+id)
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleMenuDto: UpdateRoleMenuDto) {
-    return this.roleMenuService.update(+id, updateRoleMenuDto)
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleMenuService.remove(+id)
+  @Get('role/:roleId')
+  async findIdByRoleId(@Param('roleId') roleId: number) {
+    return new Result(await this.roleMenuService.findIdByRoleId(roleId))
   }
 }

@@ -1,28 +1,24 @@
+/*
+ * @Description:
+ * @Author: hyx
+ * @Date: 2023-11-18 15:12:58
+ */
+
 import { Injectable } from '@nestjs/common'
-import { CreateRoleResourceDto } from './dto/create-role-resource.dto'
-import { UpdateRoleResourceDto } from './dto/update-role-resource.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { RoleResource } from './entities/role-resource.entity'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class RoleResourceService {
-  create(createRoleResourceDto: CreateRoleResourceDto) {
-    console.log('createRoleResourceDto', createRoleResourceDto)
-    return 'This action adds a new roleResource'
-  }
+  constructor(@InjectRepository(RoleResource) private readonly roleResourceRepository: Repository<RoleResource>) {}
 
-  findAll() {
-    return `This action returns all roleResource`
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} roleResource`
-  }
-
-  update(id: number, updateRoleResourceDto: UpdateRoleResourceDto) {
-    console.log('updateRoleResourceDto', updateRoleResourceDto)
-    return `This action updates a #${id} roleResource`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} roleResource`
+  async findIdByRoleId(roleId: number) {
+    const data: RoleResource[] = await this.roleResourceRepository.query(
+      'select resource_id resourceId from t_role_resource where role_id=?',
+      [roleId],
+    )
+    const resourceIds = data.map((item) => item.resourceId)
+    return resourceIds
   }
 }

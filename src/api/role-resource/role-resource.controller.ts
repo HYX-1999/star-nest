@@ -1,34 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+/*
+ * @Description:
+ * @Author: hyx
+ * @Date: 2023-11-18 15:18:44
+ */
+
+import { Controller, Get, Param } from '@nestjs/common'
 import { RoleResourceService } from './role-resource.service'
-import { CreateRoleResourceDto } from './dto/create-role-resource.dto'
-import { UpdateRoleResourceDto } from './dto/update-role-resource.dto'
+import { Result } from 'src/common/result'
 
 @Controller('role-resource')
 export class RoleResourceController {
   constructor(private readonly roleResourceService: RoleResourceService) {}
 
-  @Post()
-  create(@Body() createRoleResourceDto: CreateRoleResourceDto) {
-    return this.roleResourceService.create(createRoleResourceDto)
-  }
-
-  @Get()
-  findAll() {
-    return this.roleResourceService.findAll()
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roleResourceService.findOne(+id)
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleResourceDto: UpdateRoleResourceDto) {
-    return this.roleResourceService.update(+id, updateRoleResourceDto)
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleResourceService.remove(+id)
+  @Get('role/:roleId')
+  async findIdByRoleId(@Param('roleId') roleId: number) {
+    return new Result(await this.roleResourceService.findIdByRoleId(roleId))
   }
 }
