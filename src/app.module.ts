@@ -9,7 +9,6 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './api/auth/auth.module'
 import { UserModule } from './api/user/user.module'
-import { RedisModule } from './api/redis/redis.module'
 import { CommentModule } from './api/comment/comment.module'
 import { ArticleModule } from './api/article/article.module'
 import { TagModule } from './api/tag/tag.module'
@@ -47,7 +46,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
     }),
     AuthModule,
     UserModule,
-    RedisModule,
     CommentModule,
     ArticleModule,
     TagModule,

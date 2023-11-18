@@ -10,12 +10,11 @@ import { RoleController } from './role.controller'
 import { RoleMenuModule } from '../role-menu/role-menu.module'
 import { RoleResourceModule } from '../role-resource/role-resource.module'
 import { AuthModule } from '../auth/auth.module'
-import { Share } from 'src/utils/share'
 import { Role } from './entities/role.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Role]), RoleMenuModule, RoleResourceModule, AuthModule, Share],
+  imports: [TypeOrmModule.forFeature([Role]), RoleMenuModule, RoleResourceModule, AuthModule],
   controllers: [RoleController],
   providers: [RoleService],
   exports: [RoleService],

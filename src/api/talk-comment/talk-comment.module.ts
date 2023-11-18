@@ -10,10 +10,9 @@ import { TalkCommentController } from './talk-comment.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { TalkComment } from './entities/talk-comment.entity'
 import { User } from '../user/entities/user.entity'
-import { Share } from 'src/utils/share'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TalkComment, User]), Share],
+  imports: [TypeOrmModule.forFeature([TalkComment, User])],
   controllers: [TalkCommentController],
   providers: [TalkCommentService],
   exports: [TalkCommentService],

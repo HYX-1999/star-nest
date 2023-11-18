@@ -8,11 +8,10 @@ import { Module } from '@nestjs/common'
 import { ResourceService } from './resource.service'
 import { ResourceController } from './resource.controller'
 import { Resource } from './entities/resource.entity'
-import { Share } from 'src/utils/share'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Resource]), Share],
+  imports: [TypeOrmModule.forFeature([Resource])],
   controllers: [ResourceController],
   providers: [ResourceService],
   exports: [ResourceService],

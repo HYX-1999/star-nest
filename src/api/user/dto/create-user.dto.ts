@@ -8,5 +8,4 @@ export class CreateUserDto {
   nickname: string
   password: string
   confirmPwd: string
-  identifyCode: string
 }
