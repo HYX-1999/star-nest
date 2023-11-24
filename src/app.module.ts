@@ -22,6 +22,7 @@ import { RoleResourceModule } from './api/role-resource/role-resource.module'
 import { RoleMenuModule } from './api/role-menu/role-menu.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { RedisModule } from './api/redis/redis.module'
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
     ResourceModule,
     RoleResourceModule,
     RoleMenuModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

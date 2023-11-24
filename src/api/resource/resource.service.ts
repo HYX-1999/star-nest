@@ -1,28 +1,21 @@
+/*
+ * @Description:
+ * @Author: hyx
+ * @Date: 2023-11-24 17:26:43
+ */
+
 import { Injectable } from '@nestjs/common'
-import { CreateResourceDto } from './dto/create-resource.dto'
-import { UpdateResourceDto } from './dto/update-resource.dto'
+import { Resource } from './entities/resource.entity'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class ResourceService {
-  create(createResourceDto: CreateResourceDto) {
-    console.log('createResourceDto', createResourceDto)
-    return 'This action adds a new resource'
-  }
+  constructor(@InjectRepository(Resource) private readonly resourceRepository: Repository<Resource>) {}
 
-  findAll() {
-    return `This action returns all resource`
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} resource`
-  }
-
-  update(id: number, updateResourceDto: UpdateResourceDto) {
-    console.log('updateResourceDto', updateResourceDto)
-    return `This action updates a #${id} resource`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} resource`
+  async getResourceByIds(ids: number[]) {
+    const queryBuilder = this.resourceRepository.createQueryBuilder('resource')
+    const resources = await queryBuilder.where('resource.id IN (:...ids)', { ids }).getMany()
+    return resources
   }
 }
