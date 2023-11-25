@@ -11,10 +11,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { MenuModule } from '../menu/menu.module'
 import { RoleMenuModule } from '../role-menu/role-menu.module'
-import { Share } from 'src/utils/share'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), RoleMenuModule, MenuModule, Share],
+  imports: [TypeOrmModule.forFeature([User]), RoleMenuModule, MenuModule],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],

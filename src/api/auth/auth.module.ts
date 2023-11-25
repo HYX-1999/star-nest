@@ -11,7 +11,6 @@ import { UserModule } from '../user/user.module'
 import { ResourceModule } from '../resource/resource.module'
 import { MenuModule } from '../menu/menu.module'
 import { RoleResourceModule } from '../role-resource/role-resource.module'
-import { RedisModule } from '../redis/redis.module'
 import { RoleMenuModule } from '../role-menu/role-menu.module'
 import { PassportModule } from '@nestjs/passport'
 import { JwtModule } from '@nestjs/jwt'
@@ -25,7 +24,6 @@ import { JwtStrategy } from './auth.strategy'
     ResourceModule,
     MenuModule,
     RoleResourceModule,
-    RedisModule,
     RoleMenuModule,
     JwtModule.register({
       secret: jwtConstants.secret,

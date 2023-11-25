@@ -15,8 +15,10 @@ export class RedisService {
   constructor(private configService: ConfigService) {
     this.redisClient = new Redis({
       port: 6379, // Redis 服务器的端口
-      host: '127.0.0.1', // Redis 服务器的主机名
+      host: '192.168.238.129', // Redis 服务器的主机名
       password: 'redis5698',
+      lazyConnect: true,
+      keepAlive: 1000,
     })
   }
 

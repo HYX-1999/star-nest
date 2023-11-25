@@ -9,10 +9,9 @@ import { ArticleService } from './article.service'
 import { ArticleController } from './article.controller'
 import { Article } from './entities/article.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Share } from 'src/utils/share'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Article]), Share],
+  imports: [TypeOrmModule.forFeature([Article])],
   controllers: [ArticleController],
   providers: [ArticleService],
   exports: [ArticleService],

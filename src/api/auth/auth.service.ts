@@ -16,7 +16,6 @@ import { MenuService } from '../menu/menu.service'
 import getMenuList from 'src/utils/getMenuList'
 import { ResourceService } from '../resource/resource.service'
 import { JwtService } from '@nestjs/jwt'
-import { RedisService } from '../redis/redis.service'
 
 @Injectable()
 export class AuthService {
@@ -27,15 +26,13 @@ export class AuthService {
     private readonly roleResourceService: RoleResourceService,
     private readonly menuService: MenuService,
     private readonly resourceService: ResourceService,
-    private readonly redisService: RedisService,
   ) {}
 
   async login(nickname: string, password: string) {
     const userInfo = await this.userService.isExistUser(nickname)
     const flag = await bcrypt.compare(password, userInfo.password)
     if (userInfo && flag) {
-      const { menu, resource } = await this.getPermission(userInfo.userRole.id)
-      this.redisService.setValue(`user:${userInfo.id}`, JSON.stringify({ roleId: userInfo.userRole.id, resource }))
+      const { menu } = await this.getPermission(userInfo.userRole.id)
       const token = await this.jwt.signAsync({ nickname: userInfo.nickname, sub: userInfo.id })
       delete userInfo.password
       userInfo.menus = menu

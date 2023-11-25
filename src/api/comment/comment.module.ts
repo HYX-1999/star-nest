@@ -10,10 +10,9 @@ import { CommentService } from './comment.service'
 import { CommentController } from './comment.controller'
 import { User } from '../user/entities/user.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Share } from 'src/utils/share'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Comment, User]), Share],
+  imports: [TypeOrmModule.forFeature([Comment, User])],
   controllers: [CommentController],
   providers: [CommentService],
   exports: [CommentService],

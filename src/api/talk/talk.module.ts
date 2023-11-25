@@ -9,10 +9,9 @@ import { TalkService } from './talk.service'
 import { TalkController } from './talk.controller'
 import { Talk } from './entities/talk.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Share } from 'src/utils/share'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Talk]), Share],
+  imports: [TypeOrmModule.forFeature([Talk])],
   controllers: [TalkController],
   providers: [TalkService],
   exports: [TalkService],
