@@ -18,8 +18,8 @@ export class Response<T> implements NestInterceptor {
       map((result) => {
         return {
           data: result.data,
-          status: result.status,
-          message: result.message,
+          code: result.code,
+          msg: result.msg,
           success: result.success,
         }
       }),

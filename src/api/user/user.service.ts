@@ -8,10 +8,17 @@ import { Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
 import { User } from './entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
+import { RoleMenuService } from '../role-menu/role-menu.service'
+import { MenuService } from '../menu/menu.service'
+import getMenuList from 'src/utils/getMenuList'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private readonly roleMenuService: RoleMenuService,
+    private readonly menuService: MenuService,
+  ) {}
 
   async create(user: User) {
     const data = await this.userRepository.save(user)
@@ -19,8 +26,6 @@ export class UserService {
   }
 
   async findByPage(pageNum: number, pageSize: number, nickname: string) {
-    console.log('pageNum', pageNum)
-    console.log('pageSize', pageSize)
     const queryBuilder = this.userRepository
       .createQueryBuilder('user')
       .leftJoin('user.userRole', 'role')
@@ -34,6 +39,19 @@ export class UserService {
       .getMany()
     const total = await queryBuilder.getCount()
     return { records: data, total, pageSize, pageNum }
+  }
+
+  async findOne(id: number) {
+    const data = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin('user.userRole', 'role')
+      .addSelect(['role.id', 'role.roleName'])
+      .where('user.id=:id', { id })
+      .getOne()
+    const menuIds = await this.roleMenuService.findIdByRoleId(data.userRole.id)
+    const list = await this.menuService.getMenuByIds(menuIds)
+    data.menus = getMenuList(list)
+    return { userInfo: data }
   }
 
   async isExistUser(nickname: string) {

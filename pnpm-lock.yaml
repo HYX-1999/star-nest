@@ -38,6 +38,9 @@ dependencies:
   ioredis:
     specifier: ^5.3.2
     version: registry.npmjs.org/ioredis@5.3.2
+  jsonwebtoken:
+    specifier: ^9.0.2
+    version: registry.npmjs.org/jsonwebtoken@9.0.2
   lodash:
     specifier: ^4.17.21
     version: registry.npmjs.org/lodash@4.17.21
@@ -79,6 +82,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.2
     version: registry.npmjs.org/@types/jest@29.5.2
+  '@types/jsonwebtoken':
+    specifier: ^9.0.5
+    version: registry.npmjs.org/@types/jsonwebtoken@9.0.5
   '@types/lodash':
     specifier: ^4.14.201
     version: registry.npmjs.org/@types/lodash@4.14.201

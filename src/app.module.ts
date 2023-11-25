@@ -4,7 +4,7 @@
  * @Date: 2023-11-17 16:07:12
  */
 
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './api/auth/auth.module'
@@ -23,6 +23,7 @@ import { RoleMenuModule } from './api/role-menu/role-menu.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { RedisModule } from './api/redis/redis.module'
+import { JwtMiddleware } from './middleware/jwt.middleware'
 
 @Module({
   imports: [
@@ -63,4 +64,16 @@ import { RedisModule } from './api/redis/redis.module'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(JwtMiddleware).forRoutes(
+      { path: 'user/getInfo', method: RequestMethod.ALL },
+      {
+        path: 'talkcomment',
+        method: RequestMethod.ALL,
+      },
+      { path: 'comment', method: RequestMethod.ALL },
+      { path: 'chat', method: RequestMethod.ALL },
+    ) //解析请求的token
+  }
+}

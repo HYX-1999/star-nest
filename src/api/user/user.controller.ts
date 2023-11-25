@@ -4,7 +4,7 @@
  * @Date: 2023-11-17 17:33:14
  */
 
-import { Controller, Get, Query } from '@nestjs/common'
+import { Controller, Get, Query, Req } from '@nestjs/common'
 import { UserService } from './user.service'
 import { Result } from 'src/common/result'
 import { isEmpty, isNil } from 'lodash'
@@ -26,5 +26,11 @@ export class UserController {
         nickname,
       ),
     )
+  }
+
+  @Get('getInfo')
+  async getUserInfo(@Req() res: any) {
+    const data = await this.userService.findOne(res.user.userId)
+    return new Result(data)
   }
 }

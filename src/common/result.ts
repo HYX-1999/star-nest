@@ -6,14 +6,14 @@
 
 export class Result {
   private data: any
-  private status: number
-  private message: string
+  private code: number
+  private msg: string
   private success: boolean
   private path: string
-  constructor(data = null, status = 200, message = null, success = true) {
+  constructor(data = null, code = 200, msg = null, success = true) {
     this.data = data
-    this.status = status
-    this.message = message
+    this.code = code
+    this.msg = msg
     this.success = success
   }
 }

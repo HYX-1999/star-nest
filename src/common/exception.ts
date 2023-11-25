@@ -11,3 +11,9 @@ export class LoginError extends HttpException {
     super(message, HttpStatus.UNAUTHORIZED)
   }
 }
+
+export class tokenError extends HttpException {
+  constructor(message: string) {
+    super(message, HttpStatus.EXPECTATION_FAILED)
+  }
+}

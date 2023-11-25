@@ -16,7 +16,7 @@ export class RedisService {
     this.redisClient = new Redis({
       port: 6379, // Redis 服务器的端口
       host: '192.168.238.129', // Redis 服务器的主机名
-      password: 'redis',
+      password: 'redis5698',
     })
   }
 
