@@ -16,6 +16,7 @@ import { PassportModule } from '@nestjs/passport'
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from './constants'
 import { JwtStrategy } from './auth.strategy'
+import { RedisModule } from '../redis/redis.module'
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { JwtStrategy } from './auth.strategy'
     MenuModule,
     RoleResourceModule,
     RoleMenuModule,
+    RedisModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '2d' },

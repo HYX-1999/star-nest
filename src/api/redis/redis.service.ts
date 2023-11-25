@@ -17,8 +17,6 @@ export class RedisService {
       port: 6379, // Redis 服务器的端口
       host: '192.168.238.129', // Redis 服务器的主机名
       password: 'redis5698',
-      lazyConnect: true,
-      keepAlive: 1000,
     })
   }
 

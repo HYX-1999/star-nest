@@ -18,6 +18,24 @@ export class UserService {
     return data
   }
 
+  async findByPage(pageNum: number, pageSize: number, nickname: string) {
+    console.log('pageNum', pageNum)
+    console.log('pageSize', pageSize)
+    const queryBuilder = this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin('user.userRole', 'role')
+      .addSelect(['role.id', 'role.roleName'])
+      .where('user.nickname LIKE :nickname', { nickname: `%${nickname}` })
+    const data = await queryBuilder
+      .select()
+      .orderBy('user.updateTime', 'DESC')
+      .skip((pageNum - 1) * pageSize)
+      .take(pageSize)
+      .getMany()
+    const total = await queryBuilder.getCount()
+    return { records: data, total, pageSize, pageNum }
+  }
+
   async isExistUser(nickname: string) {
     const res = await this.userRepository
       .createQueryBuilder('user')
