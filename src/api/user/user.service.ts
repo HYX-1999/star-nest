@@ -51,7 +51,7 @@ export class UserService {
     const menuIds = await this.roleMenuService.findIdByRoleId(data.userRole.id)
     const list = await this.menuService.getMenuByIds(menuIds)
     data.menus = getMenuList(list)
-    return { userInfo: data }
+    return data
   }
 
   async isExistUser(nickname: string) {
