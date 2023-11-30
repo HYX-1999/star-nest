@@ -23,7 +23,7 @@ export class UserController {
       await this.userService.findByPage(
         !isNil(pageNum) && !isEmpty(pageNum) ? pageNum : 1,
         !isNil(pageSize) && !isEmpty(pageSize) ? pageSize : 10,
-        nickname,
+        !isNil(nickname) && !isEmpty(nickname) ? nickname : '',
       ),
     )
   }
